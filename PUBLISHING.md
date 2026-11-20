@@ -1,0 +1,127 @@
+# Publishing this model
+
+This repo was created from the CVDLINK **model-template**. Work through the checklist below to
+release the model to Zenodo → OpenAIRE → EOSC. Besides the Zenodo record, the model gets an
+**AI Card** and an **AIMe registry** entry: ➡ **[`ai-model/`](ai-model/)**.
+
+Not an AI model? Use the general
+[**repo-template**](https://github.com/CVDLINK/repo-template) instead — it fits tools, datasets
+and other outputs.
+
+![Data flow](data-flow.jpg)
+
+This file is a temporary checklist: once everything is published, you delete it (stage 8) so your
+repo stays minimal.
+
+## Checklist
+
+Everything up to the release is reversible — after the
+release it is not.
+
+### 0 · Create your repo from the template (GitHub)
+
+- [ ] On the [template's GitHub page](https://github.com/CVDLINK/model-template), click the green
+      **Use this template** button (top right) → *Create a new repository*.
+- [ ] Choose the owner, name and visibility. Either visibility works for now, but Zenodo can only
+      archive **public** repos, so it has to be public before stage 4.
+
+### 1 · In this repo (GitHub)
+
+- [ ] Fill in `README.md`.
+- [ ] Update `CHANGELOG.md` for the release.
+- [ ] Confirm the `LICENSE` (default MIT — change if needed; don't hand-write license text).
+- [ ] Edit `.zenodo.json` (title, description, creators, keywords) — keep `communities: cvdlink`.
+      Write every name as **`Lastname, Firstname`** (e.g. `"Virtanen, Anna"`).
+      **`orcid` is optional** — delete the line for any creator without one. Zenodo checks it, so a
+      placeholder value makes the release fail.
+- [ ] **Validate `.zenodo.json`** (e.g. <https://www.jsonschemavalidator.net/>). If it has errors,
+      Zenodo silently publishes nothing — this failure gives you no warning.
+- [ ] Add the content you're sharing: code, weights, notebooks, evaluation results.
+
+### 2 · Describe the model (GitHub)
+
+Step-by-step instructions and commands are in **[`ai-model/README.md`](ai-model/README.md)**.
+In short:
+
+- [ ] Write the model's **model description file** (`ai-model/model-description.yaml`, copied from
+      the template beside it) — one file that feeds both the AI Card and the AIMe record.
+- [ ] Generate the **AI Card** and commit it — it is versioned with the model and travels into the
+      Zenodo archive with the release.
+- [ ] Generate and submit the **AIMe registry record**; keep the returned **report key** (you need
+      it to update the entry later) and add the registry link to `README.md`.
+
+### 3 · Make it public (GitHub)
+
+- [ ] Confirm no sensitive content (data, site identifiers, credentials, internal URLs).
+- [ ] If the repo is still private, make it **public** (*Settings → General → Danger Zone →
+      Change visibility*).
+
+### 4 · Connect to Zenodo (zenodo.org) — before releasing
+
+- [ ] Sign in to **[zenodo.org](https://zenodo.org)** with GitHub (first time only).
+- [ ] On your **[Zenodo GitHub settings page](https://zenodo.org/account/settings/github/)**, find
+      this repo and switch the toggle **ON**. Press *Sync now* if a newly created repo isn't listed.
+
+> **The next step is permanent.** A published Zenodo record cannot be deleted — it gets a DOI
+> and stays. Zenodo also archives **only** releases published *after* the toggle above is on.
+
+### 5 · Release (GitHub)
+
+- [ ] Cut a versioned GitHub **release** — this is the distributable snapshot and the trigger for
+      everything downstream.
+
+### 6 · Verify (zenodo.org)
+
+- [ ] Check the release reached Zenodo: on the
+      [Zenodo GitHub settings page](https://zenodo.org/account/settings/github/), click the repo
+      name to see each release's status. If it failed, the error is shown there.
+- [ ] Check the **Zenodo record**: metadata complete (title, authors, keywords, license).
+- [ ] The record joins the **`cvdlink`** community only after a community curator accepts its
+      inclusion request — until then it is published, with a DOI, but not listed there.
+- [ ] Optionally upload the **AI Card** HTML as a file on the record too, so people can read it
+      without downloading the archive.
+- [ ] Add the **DOI** to `README.md` under *How to cite*, along with the AIMe link — plus the
+      AI4EOSC Marketplace link if you list the model there
+      ([`ai-model/AI4EOSC.md`](ai-model/AI4EOSC.md)).
+- [ ] Put the DOI in the model description's `card_metadata.identifier` and regenerate the AI Card,
+      so the card points at its record (see [`ai-model/`](ai-model/)).
+
+### 7 · Automatic — nothing to do
+
+OpenAIRE harvests the Zenodo record, and it becomes discoverable through the EOSC EU Node.
+
+**Later:** a new GitHub release becomes a new Zenodo version with its own DOI. Not every commit
+needs one.
+
+### 8 · Clean up (GitHub)
+
+- [ ] Delete this file (`PUBLISHING.md`), its diagram (`data-flow.jpg`) and the template note at
+      the top of `README.md`, then commit and push. The checklist stays readable in the
+      [template repo](https://github.com/CVDLINK/model-template/blob/main/PUBLISHING.md).
+- [ ] In `ai-model/`, delete the starter material: `examples/`, `model-description-template.yaml`
+      and `AI4EOSC.md`. Keep the rest — the generators need it when you update the model later.
+- [ ] Cut a new **release** (e.g. a patch version), so the latest Zenodo version is the clean one.
+
+## Notes
+
+- This template uses **`.zenodo.json`** for citation/metadata — it's the file Zenodo reads,
+  and the only one that can carry the `cvdlink` community and EU grant info.
+- The `grants` entry is pre-filled with CVDLINK's Horizon Europe grant (`101137278`) — leave it
+  as-is so the record links to the project in OpenAIRE/EOSC.
+- If you change the `LICENSE`, update the `.zenodo.json` `"license"` id to match (Zenodo uses
+  lowercase ids, e.g. `"mit"`, `"apache-2.0"`, `"cc-by-4.0"`).
+- `"upload_type"` is pre-set to `software`, which is right for a model — leave it.
+
+<details>
+<summary><strong>Metadata reference</strong> — contributors, CITATION.cff, OpenAIRE minimums</summary>
+
+- **The `contributors` block is optional.** Fill it in for people who aren't authors (e.g. data
+  curator, supervisor), or delete the whole block if there are none. Each contributor needs a
+  `type` (e.g. `ProjectMember`, `DataCurator`, `Supervisor`).
+- **`CITATION.cff` is optional.** Add one if you want GitHub's "Cite this repository" button.
+  Zenodo ignores it when `.zenodo.json` is present, so it's purely for the GitHub UI.
+- **Minimum metadata for indexing (OpenAIRE).** Every research product needs at least one
+  persistent identifier — the Zenodo DOI covers this. Research software additionally needs only a
+  title and a publishing date, so a correctly filled `.zenodo.json` clears the bar comfortably.
+
+</details>

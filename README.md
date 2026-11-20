@@ -1,0 +1,48 @@
+# <Model name>
+
+> Created from the CVDLINK **model-template**. Fill in the placeholders below, then work
+> through [PUBLISHING.md](PUBLISHING.md) to release this model to Zenodo → OpenAIRE → EOSC.
+> Delete this note once everything is published (PUBLISHING.md stage 8).
+
+## What it is
+
+<2–5 sentences: what the model does, and its intended use.>
+
+## Status
+
+`experimental`  <!-- one of: experimental | prototype | stable | archived -->
+
+## Inputs / outputs
+
+- **Input:** <e.g. 12-lead ECG (median beat) · OMOP EHR table · CT image>
+- **Output:** <e.g. class probability · segmentation mask · embedding>
+
+## Install / run
+
+```bash
+# example only — nothing below exists yet; replace with your real steps
+pip install -r requirements.txt
+python run.py --input example_input
+```
+
+## Model documentation
+
+The model is described by an **AI Card**: what it does, the data and cohort it was built on, how
+it was evaluated, its limitations, and — for a system used on people — its risk profile. The card
+is generated from the model description file and lives in this repo, so it is versioned with the
+model and archived with each release.
+
+- **AI Card:** [`ai-model/model-description.html`](ai-model/model-description.html)
+- **AIMe registry:** <add the registry link once the record is submitted.>
+
+## Maintainer
+
+<Team or person> · <contact email>
+
+## How to cite
+
+Once this repo is archived to Zenodo, add the DOI here (citation metadata lives in `.zenodo.json`).
+
+<!-- Optional: if the model is also listed on the AI4EOSC Marketplace
+     (see ai-model/AI4EOSC.md), add that link here too. -->
+- **Run it:** <AI4EOSC Marketplace link — delete this line if not listed>
