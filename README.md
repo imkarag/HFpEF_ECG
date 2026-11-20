@@ -12,6 +12,8 @@ This model performs multitask classification of normals vs HF subjects &ndash; H
 
 To develop this model, open access data were retrieved from Physionet: PTB Diagnostic ECG Database, MUSIC (Sudden Cardiac Death in Chronic Heart Failure)
 
+The model is intendent as a potential screening tool to identify individuals who may benefit from further echocardiographic and biomarker-based evaluation, rather than a standalone diagnostic test.
+
 ## Status
 
 `experimental`  <!-- one of: experimental | prototype | stable | archived -->
