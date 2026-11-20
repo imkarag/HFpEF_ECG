@@ -1,12 +1,6 @@
 {
   "title": "HFpEF ECG",
-  "description": "A VCG-based machine learning model for Heart Failure classification in subjects with Sinus rhythm. 
-  
-This model performs multitask classification of normals vs HF subjects &ndash; HFpEF (EF ≥ 50%) and HFrEF (EF < 50%).
-
-To develop this model, open access data were retrieved from Physionet: PTB Diagnostic ECG Database, MUSIC (Sudden Cardiac Death in Chronic Heart Failure)
-
-The model is intendent as a potential screening tool to identify individuals who may benefit from further echocardiographic and biomarker-based evaluation, rather than a standalone diagnostic test.",
+  "description": "A VCG-based machine learning model for Heart Failure classification in subjects with Sinus rhythm. \n  \nThis model performs multitask classification of normals vs HF subjects &ndash; HFpEF (EF ≥ 50%) and HFrEF (EF < 50%).\n\nTo develop this model, open access data were retrieved from Physionet: PTB Diagnostic ECG Database, MUSIC (Sudden Cardiac Death in Chronic Heart Failure)\n\nThe model is intendent as a potential screening tool to identify individuals who may benefit from further echocardiographic and biomarker-based evaluation, rather than a standalone diagnostic test.",
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",
