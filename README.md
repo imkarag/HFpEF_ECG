@@ -1,4 +1,4 @@
-# <Model name>
+# <HFpEF ECG model>
 
 > Created from the CVDLINK **model-template**. Fill in the placeholders below, then work
 > through [PUBLISHING.md](PUBLISHING.md) to release this model to Zenodo → OpenAIRE → EOSC.
@@ -6,7 +6,11 @@
 
 ## What it is
 
-<2–5 sentences: what the model does, and its intended use.>
+A VCG-based machine learning model for Heart Failure classification in subjects with Sinus rhythm.
+
+This model performs multitask classification of normals vs HF subjects &ndash; HFpEF (EF ≥ 50%) and HFrEF (EF < 50%).
+
+To develop this model, open access data were retrieved from Physionet: PTB Diagnostic ECG Database, MUSIC (Sudden Cardiac Death in Chronic Heart Failure)
 
 ## Status
 
@@ -14,16 +18,30 @@
 
 ## Inputs / outputs
 
-- **Input:** <e.g. 12-lead ECG (median beat) · OMOP EHR table · CT image>
-- **Output:** <e.g. class probability · segmentation mask · embedding>
+- **Input:** VCG signals in WFDB format (.dat/.hea) with sampling frequency of 500Hz or above (model was trained on 1000Hz recordings)
+- **Output:** JSON object describing the probability of the patient belonging to each class
 
 ## Install / run
-
+### 1. Load the Docker image
 ```bash
-# example only — nothing below exists yet; replace with your real steps
-pip install -r requirements.txt
-python run.py --input example_input
+docker load -i hfpef-preprocessing-inference.tar
 ```
+
+### 2. Run the pipeline
+```bash
+docker run hfpef-preprocessing-inference
+```
+
+### 3. View results
+
+Results will be saved inside the container at `/03_output/`
+
+To save results to your computer:
+```bash
+docker run -v %cd%/python:/02_code/python -v %cd%/output:/03_output hfpef-preprocessing-inference
+```
+
+Results will appear in the `output/` folder (.json file).
 
 ## Model documentation
 
@@ -37,7 +55,8 @@ model and archived with each release.
 
 ## Maintainer
 
-<Team or person> · <contact email>
+Ioannis Marios Karagiannis, ikaragij@auth.gr
+Ioanna Chouvarda, ioannach@auth.gr
 
 ## How to cite
 
